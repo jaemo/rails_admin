@@ -3,8 +3,15 @@ source 'https://rubygems.org'
 case ENV['RAILS_VERSION']
 when '4.0'
   gem 'rails', '~> 4.0.0'
+  gem 'devise', '>= 3.2'
+  gem 'test-unit'
+when '4.1'
+  gem 'rails', '~> 4.1.0'
+  gem 'devise', '>= 3.2'
 else
-  gem 'rails', '~> 4.1'
+  gem 'rails', '~> 4.2.0'
+  gem 'sass-rails', '~> 5.0'
+  gem 'devise', '>= 3.4'
 end
 
 case ENV['CI_ORM']
@@ -12,7 +19,6 @@ when 'mongoid'
   gem 'mongoid', '~> 4.0.0.beta1'
   gem 'mongoid-paperclip', '>= 0.0.8', require: 'mongoid_paperclip'
   gem 'carrierwave-mongoid', '>= 0.6.3', require: 'carrierwave/mongoid'
-  gem 'mongoid-grid_fs', '1.9.1' # workaround for mime-types version issue
 else
   platforms :jruby do
     case ENV['CI_DB_ADAPTER']
@@ -38,6 +44,8 @@ else
       gem 'sqlite3', '>= 1.3'
     end
   end
+
+  gem 'paper_trail', '~> 3.0'
 end
 
 group :development, :test do
@@ -46,17 +54,17 @@ end
 
 group :test do
   gem 'cancan', '>= 1.6'
+  gem 'cancancan', '~> 1.9'
   gem 'capybara', '>= 2.1'
   gem 'carrierwave', '>= 0.8'
   gem 'coveralls'
-  gem 'database_cleaner', '>= 1.2'
-  gem 'devise', '>= 3.2'
+  gem 'database_cleaner', ['>= 1.2', '!= 1.4.0']
   gem 'dragonfly', '~> 1.0'
   gem 'factory_girl', '>= 4.2'
   gem 'generator_spec', '>= 0.8'
   gem 'launchy', '>= 2.2'
   gem 'mini_magick', '>= 3.4'
-  gem 'paperclip', '3.5.2'
+  gem 'paperclip', '>= 3.4'
   gem 'poltergeist', '~> 1.5'
   gem 'rack-cache', require: 'rack/cache'
   gem 'rspec-rails', '>= 2.14'
